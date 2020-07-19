@@ -1,0 +1,18 @@
+.topWrapper {
+  display: grid;
+  grid-row-gap: 60px;
+}
+.headerWrapper {
+  text-decoration: underline;
+}
+/**
+.ProductOverviewImg {
+  border: 1px black solid;
+  width: 100px;
+  height: 100px;
+}
+.ProductOverviewDeatils {
+  border: 1px black solid;
+  width: 100px;
+  height: 30px;
+}**/
