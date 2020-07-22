@@ -1,9 +1,12 @@
 import React from 'react'
 import { Button, Icon, Label } from 'semantic-ui-react'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart } from './actions'
 
 const productDetailsWrapper = {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr 4fr 4fr 1fr',
     justifyItems: 'center',
 }
 const productDetailsImgWrapper = {
@@ -17,7 +20,7 @@ const productDetailsImg = {
 const productDetailsDetailsContainer = {}
 const productDetailsHeader = {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '0fr 1fr 1fr',
     gridColumnGap: '12px',
 }
 
@@ -29,6 +32,7 @@ const addToCartButtonUI = {
     backgroundColor: 'black',
     border: 'none',
     color: 'white',
+    cursor: 'pointer',
 }
 
 const productDesUI = {
@@ -38,9 +42,18 @@ const productDesUI = {
     fontSize: '8px',
 }
 
-function ProductDetails() {
+const backArrowUI = {
+    fontSize: '0.8rem',
+    cursor: 'pointer',
+}
+
+function ProductDetails(props) {
+    const { productId } = props
+    const dispatch = useDispatch()
+
     return (
         <div style={productDetailsWrapper}>
+            <div></div>
             <div style={productDetailsImgWrapper}>
                 <img
                     style={productDetailsImg}
@@ -49,8 +62,17 @@ function ProductDetails() {
             </div>
             <div style={productDetailsDetailsContainer}>
                 <div style={productDetailsHeader}>
+                    <ArrowBackIcon
+                        style={backArrowUI}
+                        onClick={() => props.viewAllProducts()}
+                    />
                     <div style={productName}>product Name</div>
-                    <Button style={addToCartButtonUI}>Add to Cart</Button>
+                    <Button
+                        onClick={() => dispatch(addToCart(productId))}
+                        style={addToCartButtonUI}
+                    >
+                        Add to Cart
+                    </Button>
                 </div>
                 <div style={productDesUI}>
                     With your permission we and our partners may use precise
@@ -64,6 +86,7 @@ function ProductDetails() {
                     Your preferences will apply to this website only.
                 </div>
             </div>
+            <div></div>
         </div>
     )
 }

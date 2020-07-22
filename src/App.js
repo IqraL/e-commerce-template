@@ -1,20 +1,47 @@
-import React from "react";
-import ProductOverviewsContainer from "./ProductOverviewsContainer";
-
-import "./App.css";
+import React, { useState } from 'react'
+import ProductOverviewsContainer from './ProductOverviewsContainer'
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 
 function App() {
-  return (
-    <div className="App">
-      <div className="topWrapper">
-        <Banner />
-        <ProductOverviewsContainer />
-      </div>
-    </div>
-  );
+    const [cartClicked, setCartClicked] = useState(false)
+
+    console.log('cartClicked', cartClicked)
+    return (
+        <div className="App">
+            <div className="topWrapper">
+                <Banner cartClicked={(value) => setCartClicked(value)} />
+                {!cartClicked ? <ProductOverviewsContainer /> : <Cart />}
+            </div>
+        </div>
+    )
 }
 
-function Banner() {
-  return <div className="headerWrapper"> Sample e-commerce site</div>;
+const headerWrapper = {
+    display: 'grid',
+    gridTemplateColumns: '3fr 1fr',
+    justifyItems: 'center',
 }
-export default App;
+
+function Banner(props) {
+    return (
+        <div style={headerWrapper}>
+            <div
+                style={{ cursor: 'pointer' }}
+                onClick={() => props.cartClicked(false)}
+            >
+                Sample e-commerce site
+            </div>
+            <div
+                style={{ cursor: 'pointer' }}
+                onClick={() => props.cartClicked(true)}
+            >
+                <ShoppingCartOutlinedIcon />
+            </div>
+        </div>
+    )
+}
+
+function Cart(props) {
+    return <div>cart page</div>
+}
+export default App

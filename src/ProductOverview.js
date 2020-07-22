@@ -39,19 +39,21 @@ function ProductOverview(props) {
     return (
         <div className="productOverviewWrapper">
             <div style={productOverviewImg}>
-                <img
-                    style={productImg}
-                    src="https://freemans.scene7.com/is/image/OttoUK/466w/creation-l-warp-look-sweater~E35415FRSC.jpg"
-                />
+                <img style={productImg} src={img} />
             </div>
             <div style={productOverviewDetails}>
                 <li
                     onClick={() => props.productClicked(id)}
                     style={productNameUI}
                 >
-                    product name
+                    {name}
                 </li>
-                <li style={productPriceUI}>£5.00</li>
+                <li
+                    onClick={() => props.productClicked(id)}
+                    style={productPriceUI}
+                >
+                    {price}
+                </li>
             </div>
         </div>
     )

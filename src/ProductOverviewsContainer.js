@@ -2,6 +2,11 @@ import React from 'react'
 import ProductOverview from './ProductOverview'
 import ProductDetails from './ProductDetails'
 
+const multipleProductOverviews = {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr',
+    justifyItems: 'center',
+}
 class ProductOverviewsContainer extends React.Component {
     constructor(props) {
         super(props)
@@ -19,29 +24,23 @@ class ProductOverviewsContainer extends React.Component {
             productOverViews.push(
                 <ProductOverview
                     id={product}
-                    img=""
-                    name=""
-                    price=""
+                    img="https://freemans.scene7.com/is/image/OttoUK/466w/creation-l-warp-look-sweater~E35415FRSC.jpg"
+                    name="product name"
+                    price="£5.00"
                     productClicked={this.productSelected.bind(this)}
                 />
             )
         })
-        console.log(products)
-        return <div>{productOverViews}</div>
+        return <div style={multipleProductOverviews}>{productOverViews}</div>
     }
 
     productSelected(selectedProduct) {
-        console.log(`26 selectedProduct : ${selectedProduct}`)
-
-        this.setState(
-            (state, props) => {
-                return {
-                    productClicked: !state.productClicked,
-                    selectedProduct,
-                }
-            },
-            () => () => console.log(`32 state: ${this.state}`)
-        )
+        this.setState((state, props) => {
+            return {
+                productClicked: !state.productClicked,
+                selectedProduct,
+            }
+        })
     }
 
     componentDidMount() {
@@ -61,18 +60,9 @@ class ProductOverviewsContainer extends React.Component {
                                 selectedProduct: null,
                             })
                         }
-                        details=""
+                        productId={this.state.selectedProduct}
                     />
                 )}
-                {}
-
-                <ProductOverview
-                    productClicked={this.productSelected.bind(this)}
-                    id="30"
-                    img=""
-                    name=""
-                    price=""
-                />
             </div>
         )
     }
