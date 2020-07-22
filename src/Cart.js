@@ -14,12 +14,16 @@ function Cart(props) {
         setProductsInfo(
             sampleProducts.filter((product) => productIds.includes(product.id))
         )
+        console.log(productsInfo)
     }, [productIds])
 
     useEffect(() => {
         setProducts(
             productsInfo.map((product) => (
-                <CartProductView description={product} />
+                <CartProductView
+                    key={`${product.id}_${product.price}`}
+                    description={product}
+                />
             ))
         )
     }, [productsInfo, productIds])
