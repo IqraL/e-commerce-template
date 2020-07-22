@@ -1,5 +1,4 @@
 import React from 'react'
-import './homePage.css'
 
 const productOverviewImg = {
     border: '1px black solid',

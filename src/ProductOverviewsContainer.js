@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductOverview from './ProductOverview'
 import ProductDetails from './ProductDetails'
+import { sampleProducts } from './sampleProducts'
 
 const multipleProductOverviews = {
     display: 'grid',
@@ -11,19 +12,18 @@ class ProductOverviewsContainer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: [1, 2, 3],
+            products: sampleProducts,
             productClicked: false,
             selectedProduct: null,
         }
     }
     createProductComponents() {
-        //console.log('createProductComponents')
         const { products } = this.state
         let productOverViews = []
         products.forEach((product) => {
             productOverViews.push(
                 <ProductOverview
-                    id={product}
+                    id={product.id}
                     img="https://freemans.scene7.com/is/image/OttoUK/466w/creation-l-warp-look-sweater~E35415FRSC.jpg"
                     name="product name"
                     price="£5.00"
@@ -45,6 +45,7 @@ class ProductOverviewsContainer extends React.Component {
 
     componentDidMount() {
         //  getProducts from server save to redux
+        console.log(sampleProducts)
     }
 
     render() {
