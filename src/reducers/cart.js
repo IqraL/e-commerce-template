@@ -11,7 +11,9 @@ const cartReducer = (
         case 'REMOVEFROMCART':
             return {
                 ...state,
-                itemIds: [...state.filter((item) => item !== action.payload)],
+                itemIds: [
+                    ...state.itemIds.filter((item) => item !== action.payload),
+                ],
             }
         case 'REMOVETOOLTIP':
             return {
