@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Icon, Label } from 'semantic-ui-react'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import Tooltip from '@material-ui/core/Tooltip'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart, removeToolTip } from './actions'
+import { sampleProducts } from './sampleProducts'
 
 const productDetailsWrapper = {
     display: 'grid',
@@ -22,7 +23,7 @@ const productDetailsImg = {
 const productDetailsDetailsContainer = {}
 const productDetailsHeader = {
     display: 'grid',
-    gridTemplateColumns: '0fr 1fr 1fr',
+    gridTemplateColumns: '0fr 1fr 1fr 1fr',
     gridColumnGap: '12px',
 }
 
@@ -53,6 +54,7 @@ function ProductDetails(props) {
     const { productId } = props
     const itemAddedTocart = useSelector((state) => state.cart.itemAddedTocart)
     const dispatch = useDispatch()
+    const [productDetails, setProductDetails] = useState({})
 
     const closeToolTip = () => {
         if (itemAddedTocart)
@@ -61,16 +63,25 @@ function ProductDetails(props) {
             }, 3000)
     }
 
+    useEffect(() => {
+        try {
+            setProductDetails(
+                sampleProducts.filter(
+                    (product) => product.id === props.productId
+                )[0]
+            )
+        } catch (e) {
+            console.log(e)
+        }
+    }, [])
+
     closeToolTip()
 
     return (
         <div style={productDetailsWrapper}>
             <div></div>
             <div style={productDetailsImgWrapper}>
-                <img
-                    style={productDetailsImg}
-                    src="https://freemans.scene7.com/is/image/OttoUK/466w/creation-l-warp-look-sweater~E35415FRSC.jpg"
-                />
+                <img style={productDetailsImg} src={productDetails.img} />
             </div>
             <div style={productDetailsDetailsContainer}>
                 <div style={productDetailsHeader}>
@@ -78,7 +89,8 @@ function ProductDetails(props) {
                         style={backArrowUI}
                         onClick={() => props.viewAllProducts()}
                     />
-                    <div style={productName}>product Name</div>
+                    <div style={productName}>{productDetails.name}</div>
+                    <div style={productName}>{productDetails.price}</div>
 
                     <Tooltip open={itemAddedTocart} title="Item added to cart">
                         <Button

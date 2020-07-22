@@ -24,9 +24,9 @@ class ProductOverviewsContainer extends React.Component {
             productOverViews.push(
                 <ProductOverview
                     id={product.id}
-                    img="https://freemans.scene7.com/is/image/OttoUK/466w/creation-l-warp-look-sweater~E35415FRSC.jpg"
-                    name="product name"
-                    price="£5.00"
+                    img={product.img}
+                    name={product.name}
+                    price={product.price}
                     productClicked={this.productSelected.bind(this)}
                 />
             )

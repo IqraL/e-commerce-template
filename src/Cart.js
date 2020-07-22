@@ -23,17 +23,17 @@ function Cart(props) {
         )
     }, [productsInfo])
 
-    return (
-        <div>
-            cart page: {console.log(productsInfo)} {products}
-        </div>
-    )
+    return <div>{products}</div>
 }
 
 function CartProductView(props) {
+    const [product, setProduct] = useState({})
+    useEffect(() => {
+        setProduct(JSON.parse(JSON.stringify(props.description)))
+    }, [])
     return (
         <div className="CartProductView">
-            {console.log('26 _ ' + props.description)}
+            <img width="100px" height="100px" src={product.img} />
         </div>
     )
 }
