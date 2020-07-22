@@ -13,7 +13,11 @@ const cartReducer = (
                 ...state,
                 itemIds: [...state.filter((item) => item !== action.payload)],
             }
-
+        case 'REMOVETOOLTIP':
+            return {
+                ...state,
+                itemAddedTocart: false,
+            }
         default:
             return state
     }

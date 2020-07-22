@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button, Icon, Label } from 'semantic-ui-react'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import Tooltip from '@material-ui/core/Tooltip'
+
 import { useSelector, useDispatch } from 'react-redux'
-import { addToCart } from './actions'
+import { addToCart, removeToolTip } from './actions'
 
 const productDetailsWrapper = {
     display: 'grid',
@@ -49,7 +51,17 @@ const backArrowUI = {
 
 function ProductDetails(props) {
     const { productId } = props
+    const itemAddedTocart = useSelector((state) => state.cart.itemAddedTocart)
     const dispatch = useDispatch()
+
+    const closeToolTip = () => {
+        if (itemAddedTocart)
+            setTimeout(() => {
+                dispatch(removeToolTip())
+            }, 3000)
+    }
+
+    closeToolTip()
 
     return (
         <div style={productDetailsWrapper}>
@@ -67,12 +79,15 @@ function ProductDetails(props) {
                         onClick={() => props.viewAllProducts()}
                     />
                     <div style={productName}>product Name</div>
-                    <Button
-                        onClick={() => dispatch(addToCart(productId))}
-                        style={addToCartButtonUI}
-                    >
-                        Add to Cart
-                    </Button>
+
+                    <Tooltip open={itemAddedTocart} title="Item added to cart">
+                        <Button
+                            onClick={() => dispatch(addToCart(productId))}
+                            style={addToCartButtonUI}
+                        >
+                            Add to Cart
+                        </Button>
+                    </Tooltip>
                 </div>
                 <div style={productDesUI}>
                     With your permission we and our partners may use precise

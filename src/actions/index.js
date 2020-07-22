@@ -10,3 +10,9 @@ export const removeFromCart = (productId) => {
         payload: productId,
     }
 }
+
+export const removeToolTip = () => {
+    return {
+        type: 'REMOVETOOLTIP',
+    }
+}
